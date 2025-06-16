@@ -10,7 +10,7 @@
 #include "jogadores/aleatorio1.h"
 #include "jogadores/aleatorio2.h"
 #include "jogadores/simples.h"
-#include "jogadores/simples2.h"
+#include "jogadores/jogador_9922593.h"
 
 #define NUM_JOGADORES 4
 
@@ -20,12 +20,12 @@ void iniciar_jogadores() {
     jogo.nomes[0] = nome_aleatorio1();
     jogo.nomes[1] = nome_aleatorio2();
     jogo.nomes[2] = nome_simples();
-    jogo.nomes[3] = nome_simples2();
+    jogo.nomes[3] = nome_jogador_9922593();
 
     iniciar_aleatorio1(0, NUM_JOGADORES);
     iniciar_aleatorio2(1, NUM_JOGADORES);
     iniciar_simples(2, NUM_JOGADORES);
-    iniciar_simples2(3, NUM_JOGADORES);
+    iniciar_9922593(3, NUM_JOGADORES);
 
     memset(jogo.penalidades, 0, sizeof(jogo.penalidades));
     jogo.jogador_inicial_mao = jogo.jogador_inicial_rodada = 0;
@@ -36,7 +36,7 @@ void informar_maos_para_jogadores(int rodada, const Rodada* r) {
     nova_rodada_aleatorio1(rodada, r->carta_virada, r->cartas_por_jogador, r->maos[0]);
     nova_rodada_aleatorio2(rodada, r->carta_virada, r->cartas_por_jogador, r->maos[1]);
     nova_rodada_simples(rodada, r->carta_virada, r->cartas_por_jogador, r->maos[2]);
-    nova_rodada_simples2(rodada, r->carta_virada, r->cartas_por_jogador, r->maos[3]);
+    nova_rodada_9922593(rodada, r->carta_virada, r->cartas_por_jogador, r->maos[3]);
 }
 
 // Função para coletar apostas dos jogadores em ordem circular
@@ -56,7 +56,7 @@ void coletar_apostas(Rodada* r) {
         if (j == 0) r->apostas[j] = apostar_aleatorio1(r->apostas);
         else if (j == 1) r->apostas[j] = apostar_aleatorio2(r->apostas);
         else if (j == 2) r->apostas[j] = apostar_simples(r->apostas);
-        else if (j == 3) r->apostas[j] = apostar_simples2(r->apostas);
+        else if (j == 3) r->apostas[j] = apostar_9922593(r->apostas);
 
         printf("%s:\t%d", jogo.nomes[j], r->apostas[j]);
         getchar();
@@ -78,7 +78,7 @@ int processar_jogadas(Rodada* r, Jogada* jogadas) {
         if (j == 0) idx = jogar_aleatorio1(NULL, 0, r->vitorias[j]);
         else if (j == 1) idx = jogar_aleatorio2(NULL, 0, r->vitorias[j]);
         else if (j == 2) idx = jogar_simples(NULL, 0, r->vitorias[j]);
-        else if (j == 3) idx = jogar_simples2(NULL, 0, r->vitorias[j]);
+        else if (j == 3) idx = jogar_9922593(NULL, 0, r->vitorias[j]);
 
         // Verifica e processa o descarte
         if (checar_e_processar_descarte(idx, j, r, jogadas)) {
